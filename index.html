@@ -1,29 +1,41 @@
-
 <!DOCTYPE html>
 <html lang="fr">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Quiz de Noël</title>
+
+
+<!-- Open Graph pour aperçu -->
+<meta property="og:title" content="Quiz de Noël 🎄">
+<meta property="og:description" content="Testez vos connaissances sur la naissance de Jésus et la fête de Noël.">
+<meta property="og:image" content="https://img.cuisineaz.com/1200x675/2022/10/19/i188932-noel-en-famille.jpg" alt="Image d'accueil">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://jeanemmanuel26121986-cell.github.io/QUIZ-NOEL/">
+
 <style>
     body { font-family: Arial, sans-serif; background: linear-gradient(135deg,#d32f2f,#388e3c); margin:0; padding:0; display:flex; justify-content:center; align-items:center; height:100vh;}
     .container { width:95%; max-width:600px; background:#fff8e1; border-radius:15px; box-shadow:0 8px 20px rgba(0,0,0,0.2); padding:20px; text-align:center;}
     img { max-width:100%; border-radius:10px; margin-bottom:15px;}
     h1,h2 { color:#b71c1c;}
-    button { background:#388e3c; color:white; padding:12px 25px; border:none; border-radius:8px; cursor:pointer; font-size:16px; margin-top:15px;}
-    button:hover { background:#2e7d32;}
+    button { padding:12px 25px; border:none; border-radius:8px; cursor:pointer; font-size:16px; margin-top:15px;}
+    button:hover { opacity:0.9;}
     input { width:90%; padding:10px; margin:10px 0; border-radius:8px; border:1px solid #ccc;}
     .hidden { display:none;}
     .progress-bar { width:100%; background:#eee; border-radius:10px; overflow:hidden; margin:15px 0;}
     .progress { height:12px; background:#d32f2f; width:0%; transition:width 0.4s ease;}
+    #nextBtn { background:#FFD700; color:#000; } /* Jaune par défaut */
+    #nextBtn:hover { background:#FFC107; }
+    #feedback { font-weight:bold; margin-top:10px;}
 </style>
 </head>
 <body>
 
 <div class="container" id="accueil">
+    <img src="https://img.cuisineaz.com/1200x675/2022/10/19/i188932-noel-en-famille.jpg" alt="Image d'accueil">
     <h1>Bienvenue au Quiz de Noël 🎄</h1>
     <p>Testez vos connaissances sur la naissance de Jésus et la fête de Noël.</p>
-    <button onclick="showLogin()">Commencer</button>
+    <button style="background:#388e3c; color:white;" onclick="showLogin()">Commencer</button>
 </div>
 
 <div class="container hidden" id="login">
@@ -31,7 +43,7 @@
     <input type="text" id="nom" placeholder="Nom" required>
     <input type="text" id="prenom" placeholder="Prénom" required>
     <input type="text" id="mouvement" placeholder="Mouvement de paroisse" required>
-    <button onclick="startQuiz()">Se connecter</button>
+    <button style="background:#388e3c; color:white;" onclick="startQuiz()">Se connecter</button>
 </div>
 
 <div class="container hidden" id="quiz">
@@ -40,26 +52,36 @@
     <p id="quizText"></p>
     <h2 id="quizQuestion"></h2>
     <div id="options"></div>
+    <p id="feedback"></p>
     <button id="nextBtn" onclick="nextQuestion()" disabled>Suivant</button>
 </div>
 
 <div class="container hidden" id="felicitation">
     <h1>🎉 Félicitations !</h1>
     <p id="finalMessage"></p>
-    <p>Score : <span id="score"></span> / 5</p>
+    <p>Score : <span id="score"></span> / 6</p>
 </div>
 
 <script>
 const questions = [
-    { image:"images/noel.jpg", text:"Noël est la fête où nous célébrons la naissance de Jésus, le Fils de Dieu.", question:"Que célèbre-t-on à Noël ?", options:["La naissance de Jésus","La naissance de Moïse","La naissance de Marie"], answer:"La naissance de Jésus"},
-    { image:"images/bethleem.jpg", text:"Jésus est né à Bethléem, une petite ville en Judée. Cette naissance avait été annoncée par les prophètes.", question:"Dans quelle ville Jésus est-il né ?", options:["Nazareth","Jérusalem","Bethléem"], answer:"Bethléem"},
-    { image:"images/bergers.jpg", text:"Les bergers ont été les premiers à recevoir l'annonce de la naissance de Jésus par les anges. Ils sont allés voir l'enfant dans la crèche.", question:"Qui a été averti en premier ?", options:["Les rois mages","Les bergers","Les prêtres"], answer:"Les bergers"},
-    { image:"images/creche.jpg", text:"Marie a donné naissance à Jésus dans une étable, car il n'y avait pas de place dans l'auberge. Elle l'a couché dans une mangeoire. La crèche représente la scène de la naissance de Jésus avec Marie, Joseph, l'enfant Jésus, les bergers et parfois les rois mages.", question:"Quels personnages sont représentés dans la crèche ?", options:["Marie, Joseph et Jésus","Marie, Joseph, Jésus et les bergers","Marie, Joseph, Jésus, bergers et rois mages"], answer:"Marie, Joseph, Jésus, bergers et rois mages"},
-    { image:"images/messe.jpg", text:"La messe de Noël est célébrée dans la nuit du 24 décembre pour accueillir Jésus.", question:"Quand célèbre-t-on la messe de Noël ?", options:["Le 24 décembre","Le 31 décembre","Le 6 janvier"], answer:"Le 24 décembre"}
+    { image:"https://lh6.googleusercontent.com/proxy/V7xf-D1ocIqjm5WKs2w9RBwzQ7hDOIyMLJgBjh5ifjKFHrQ1fSHPo1YEF-p4hoPjfYZ9hGkAZJhTuzWVNCKNMsbG3onaqVsTcyK73a39ETdUSR7eUol3FmEsuyZaVXutzA", text:"Noël est la fête chrétienne qui commémore la naissance de Jésus-Christ, considéré comme le Fils de Dieu et Sauveur du monde. Cette célébration rappelle l’amour et l’espérance apportés par sa venue.", question:"Que célèbre-t-on à Noël ?", options:["La naissance de Jésus","La naissance de Moïse","La naissance de Marie"], answer:"La naissance de Jésus"},
+    { image:"https://st2.depositphotos.com/5886116/9429/v/450/depositphotos_94299508-stock-illustration-christmas-night-bethlehem-wise-men.jpg", text:"Jésus est né à Bethléem, une petite ville en Judée, comme annoncé par les prophètes dans l’Ancien Testament. Cette ville est devenue un symbole de paix et d’humilité..", question:"Dans quelle ville Jésus est-il né ?", options:["Nazareth","Jérusalem","Bethléem"], answer:"Bethléem"},
+    { image:"https://www.curieuxdedieu.fr/wp-content/uploads/sites/36/2022/09/CDD-Idees-cadeaux-Noel-MEA.jpg", text:"Les anges ont annoncé la naissance de Jésus aux bergers, des hommes simples et humbles, pour montrer que le message de Dieu s’adresse à tous, même aux plus modestes.", question:"Qui a été averti en premier ?", options:["Les rois mages","Les bergers","Les prêtres"], answer:"Les bergers"},
+    { image:"https://www.sapins-noel.org/wp-content/uploads/2023/11/creche-noel-lumineuse-11-figurines.jpg", text:"La crèche illustre la scène de la Nativité : Marie, Joseph, l’enfant Jésus, les bergers et parfois les rois mages. Elle rappelle la simplicité et la joie de cet événement.", question:"Quels personnages sont représentés dans la crèche ?", options:["Marie, Joseph et Jésus","Marie, Joseph, Jésus et les bergers","Marie, Joseph, Jésus, bergers et rois mages"], answer:"Marie, Joseph, Jésus, bergers et rois mages"},
+    { image:"https://rennes.catholique.fr/wp-content/uploads/sites/11/2023/11/231128-messe-noel.jpg", text:"La messe de Noël est célébrée dans la nuit du 24 décembre, appelée « Nuit Sainte », pour accueillir la naissance de Jésus dans la joie et la prière.", question:"Quand célèbre-t-on la messe de Noël ?", options:["Le 24 décembre","Le 31 décembre","Le 6 janvier"], answer:"Le 24 décembre"},
+    { image:"https://www.shutterstock.com/image-illustration/christmas-nativity-scene-baby-jesus-600nw-2474220517.jpg", text:"Marie a donné naissance à Jésus dans une étable, car il n’y avait pas de place dans l’auberge. Cette humilité montre que Jésus est venu pour tous, sans richesse ni privilège.", question:"Où Marie a-t-elle donné naissance à Jésus ?", options:["Dans une maison","Dans une étable","Dans un palais"], answer:"Dans une étable"}
 ];
 
 let currentQuestion=0, score=0, nom="", prenom="", mouvement="";
-const GOOGLE_SCRIPT_URL="VOTRE_URL_SCRIPT"; // Remplacez par votre URL Apps Script
+
+// ✅ Remplacez par votre URL Google Form
+const GOOGLE_FORM_URL="https://docs.google.com/forms/d/e/1FAIpQLSc0Z3F_vYk0cbAIUfPNy7sVOtAYAQAnxvuMhIE2iX-3ECUacw/formResponse";
+
+// ✅ Remplacez par vos entry IDs
+const ENTRY_NOM="entry.1262069971";
+const ENTRY_PRENOM="entry.767165762";
+const ENTRY_MOUVEMENT="entry.134480479";
+const ENTRY_SCORE="entry.1536615570";
 
 function showLogin(){document.getElementById('accueil').classList.add('hidden');document.getElementById('login').classList.remove('hidden');}
 function startQuiz(){
@@ -75,33 +97,58 @@ function loadQuestion(){
     document.getElementById('quizText').textContent=q.text;
     document.getElementById('quizQuestion').textContent=q.question;
     const optionsDiv=document.getElementById('options');optionsDiv.innerHTML="";
+    document.getElementById('feedback').textContent="";
     q.options.forEach(opt=>{
         const btn=document.createElement('button');btn.textContent=opt;btn.style.display="block";btn.style.margin="10px auto";
         btn.onclick=()=>checkAnswer(opt);optionsDiv.appendChild(btn);
     });
     document.getElementById('nextBtn').disabled=true;
-    document.getElementById('nextBtn').style.backgroundColor="#388e3c"; // couleur par défaut
+    document.getElementById('nextBtn').style.backgroundColor="#FFD700"; // Reset jaune
+    document.getElementById('nextBtn').style.color="#000";
     updateProgress();
 }
 function checkAnswer(selected){
     if(selected===questions[currentQuestion].answer){
         score++;
-        alert("✅ Bonne réponse !");
+        document.getElementById('feedback').textContent="✅ Bonne réponse !";
+        document.getElementById('feedback').style.color="green";
         document.getElementById('nextBtn').disabled=false;
-        document.getElementById('nextBtn').style.backgroundColor="#4CAF50"; // ✅ Vert vif
+        document.getElementById('nextBtn').style.backgroundColor="#4CAF50"; // Vert
+        document.getElementById('nextBtn').style.color="#fff";
     } else {
-        alert("❌ Mauvaise réponse, essayez encore !");
+        document.getElementById('feedback').textContent="❌ Mauvaise réponse, essayez encore !";
+        document.getElementById('feedback').style.color="red";
     }
 }
 function nextQuestion(){
     currentQuestion++;
     if(currentQuestion<questions.length){loadQuestion();}
     else{
-        sendToGoogleSheet(); // ✅ Envoi des données à Google Sheets
+        sendToGoogleForm();
         document.getElementById('quiz').classList.add('hidden');
         document.getElementById('felicitation').classList.remove('hidden');
         document.getElementById('finalMessage').textContent=`Bravo ${prenom}, vous avez terminé le quiz !`;
         document.getElementById('score').textContent=score;
     }
 }
-function updateProgress(){document.getElementById('progress').style.width=((currentQuestion)/questions.length)*100+"%";}
+function updateProgress(){document.getElementById('progress').style.width=((currentQuestion+1)/questions.length)*100+"%";}
+
+// ✅ Envoi des données au Google Form
+function sendToGoogleForm(){
+    const formData = new FormData();
+    formData.append(ENTRY_NOM, nom);
+    formData.append(ENTRY_PRENOM, prenom);
+    formData.append(ENTRY_MOUVEMENT, mouvement);
+    formData.append(ENTRY_SCORE, score);
+
+    fetch(GOOGLE_FORM_URL, {
+        method: "POST",
+        body: formData,
+        mode: "no-cors" // Important pour éviter les erreurs CORS
+    }).then(() => {
+        console.log("✅ Données envoyées au Google Form !");
+    }).catch(err => console.error("Erreur:", err));
+}
+</script>
+</body>
+</html>
