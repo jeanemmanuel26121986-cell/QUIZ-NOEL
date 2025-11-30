@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="fr">
 <head>
@@ -5,69 +6,16 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Quiz de Noël</title>
 <style>
-    body {
-        font-family: Arial, sans-serif;
-        background: linear-gradient(135deg, #d32f2f, #388e3c);
-        margin: 0;
-        padding: 0;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        height: 100vh;
-    }
-    .container {
-        width: 95%;
-        max-width: 600px;
-        background: #fff8e1;
-        border-radius: 15px;
-        box-shadow: 0 8px 20px rgba(0,0,0,0.2);
-        padding: 20px;
-        text-align: center;
-    }
-    img {
-        max-width: 100%;
-        border-radius: 10px;
-        margin-bottom: 15px;
-    }
-    h1, h2 {
-        color: #b71c1c;
-    }
-    button {
-        background: #388e3c;
-        color: white;
-        padding: 12px 25px;
-        border: none;
-        border-radius: 8px;
-        cursor: pointer;
-        font-size: 16px;
-        margin-top: 15px;
-    }
-    button:hover {
-        background: #2e7d32;
-    }
-    input {
-        width: 90%;
-        padding: 10px;
-        margin: 10px 0;
-        border-radius: 8px;
-        border: 1px solid #ccc;
-    }
-    .hidden {
-        display: none;
-    }
-    .progress-bar {
-        width: 100%;
-        background: #eee;
-        border-radius: 10px;
-        overflow: hidden;
-        margin: 15px 0;
-    }
-    .progress {
-        height: 12px;
-        background: #d32f2f;
-        width: 0%;
-        transition: width 0.4s ease;
-    }
+    body { font-family: Arial, sans-serif; background: linear-gradient(135deg,#d32f2f,#388e3c); margin:0; padding:0; display:flex; justify-content:center; align-items:center; height:100vh;}
+    .container { width:95%; max-width:600px; background:#fff8e1; border-radius:15px; box-shadow:0 8px 20px rgba(0,0,0,0.2); padding:20px; text-align:center;}
+    img { max-width:100%; border-radius:10px; margin-bottom:15px;}
+    h1,h2 { color:#b71c1c;}
+    button { background:#388e3c; color:white; padding:12px 25px; border:none; border-radius:8px; cursor:pointer; font-size:16px; margin-top:15px;}
+    button:hover { background:#2e7d32;}
+    input { width:90%; padding:10px; margin:10px 0; border-radius:8px; border:1px solid #ccc;}
+    .hidden { display:none;}
+    .progress-bar { width:100%; background:#eee; border-radius:10px; overflow:hidden; margin:15px 0;}
+    .progress { height:12px; background:#d32f2f; width:0%; transition:width 0.4s ease;}
 </style>
 </head>
 <body>
@@ -98,116 +46,62 @@
 <div class="container hidden" id="felicitation">
     <h1>🎉 Félicitations !</h1>
     <p id="finalMessage"></p>
-    <p>Score : <span id="score"></span> / 6</p>
+    <p>Score : <span id="score"></span> / 5</p>
 </div>
 
 <script>
 const questions = [
-    { image: "images/noel.jpg", text: "Noël est la fête où nous célébrons la naissance de Jésus.", question: "Que célèbre-t-on à Noël ?", options: ["La naissance de Jésus", "La naissance de Moïse", "La naissance de Marie"], answer: "La naissance de Jésus" },
-    { image: "images/bethleem.jpg", text: "Jésus est né à Bethléem.", question: "Dans quelle ville Jésus est-il né ?", options: ["Nazareth", "Jérusalem", "Bethléem"], answer: "Bethléem" },
-    { image: "images/bergers.jpg", text: "Les bergers ont été les premiers avertis.", question: "Qui a été averti en premier ?", options: ["Les rois mages", "Les bergers", "Les prêtres"], answer: "Les bergers" },
-    { image: "images/etable.jpg", text: "Marie a donné naissance à Jésus dans une étable.", question: "Où Marie a-t-elle donné naissance ?", options: ["Dans un palais", "Dans une étable", "Dans une auberge"], answer: "Dans une étable" },
-    { image: "images/creche.jpg", text: "La crèche représente la scène de la naissance.", question: "Quels personnages sont représentés ?", options: ["Marie, Joseph et Jésus", "Marie, Joseph, Jésus et les bergers", "Marie, Joseph, Jésus, bergers et rois mages"], answer: "Marie, Joseph, Jésus, bergers et rois mages" },
-    { image: "images/messe.jpg", text: "La messe de Noël est célébrée le 24 décembre.", question: "Quand célèbre-t-on la messe de Noël ?", options: ["Le 24 décembre", "Le 31 décembre", "Le 6 janvier"], answer: "Le 24 décembre" }
+    { image:"images/noel.jpg", text:"Noël est la fête où nous célébrons la naissance de Jésus, le Fils de Dieu.", question:"Que célèbre-t-on à Noël ?", options:["La naissance de Jésus","La naissance de Moïse","La naissance de Marie"], answer:"La naissance de Jésus"},
+    { image:"images/bethleem.jpg", text:"Jésus est né à Bethléem, une petite ville en Judée. Cette naissance avait été annoncée par les prophètes.", question:"Dans quelle ville Jésus est-il né ?", options:["Nazareth","Jérusalem","Bethléem"], answer:"Bethléem"},
+    { image:"images/bergers.jpg", text:"Les bergers ont été les premiers à recevoir l'annonce de la naissance de Jésus par les anges. Ils sont allés voir l'enfant dans la crèche.", question:"Qui a été averti en premier ?", options:["Les rois mages","Les bergers","Les prêtres"], answer:"Les bergers"},
+    { image:"images/creche.jpg", text:"Marie a donné naissance à Jésus dans une étable, car il n'y avait pas de place dans l'auberge. Elle l'a couché dans une mangeoire. La crèche représente la scène de la naissance de Jésus avec Marie, Joseph, l'enfant Jésus, les bergers et parfois les rois mages.", question:"Quels personnages sont représentés dans la crèche ?", options:["Marie, Joseph et Jésus","Marie, Joseph, Jésus et les bergers","Marie, Joseph, Jésus, bergers et rois mages"], answer:"Marie, Joseph, Jésus, bergers et rois mages"},
+    { image:"images/messe.jpg", text:"La messe de Noël est célébrée dans la nuit du 24 décembre pour accueillir Jésus.", question:"Quand célèbre-t-on la messe de Noël ?", options:["Le 24 décembre","Le 31 décembre","Le 6 janvier"], answer:"Le 24 décembre"}
 ];
 
-let currentQuestion = 0;
-let userName = "";
-let score = 0;
-let nom = "", prenom = "", mouvement = "";
+let currentQuestion=0, score=0, nom="", prenom="", mouvement="";
+const GOOGLE_SCRIPT_URL="VOTRE_URL_SCRIPT"; // Remplacez par votre URL Apps Script
 
-// ✅ Remplacez par votre URL Google Apps Script
-const GOOGLE_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbxn-At0FQbvVf19rJZZ__SFvmnXbSF5GjI6MbGLvgzhIqqOpsuNBIleOPAh3hsGw0TV/exec";
-
-function showLogin() {
-    document.getElementById('accueil').classList.add('hidden');
-    document.getElementById('login').classList.remove('hidden');
+function showLogin(){document.getElementById('accueil').classList.add('hidden');document.getElementById('login').classList.remove('hidden');}
+function startQuiz(){
+    nom=document.getElementById('nom').value.trim();
+    prenom=document.getElementById('prenom').value.trim();
+    mouvement=document.getElementById('mouvement').value.trim();
+    if(nom&&prenom&&mouvement){document.getElementById('login').classList.add('hidden');document.getElementById('quiz').classList.remove('hidden');loadQuestion();}
+    else alert("Veuillez remplir tous les champs.");
 }
-
-function startQuiz() {
-    nom = document.getElementById('nom').value.trim();
-    prenom = document.getElementById('prenom').value.trim();
-    mouvement = document.getElementById('mouvement').value.trim();
-
-    if(nom && prenom && mouvement) {
-        userName = prenom;
-        document.getElementById('login').classList.add('hidden');
-        document.getElementById('quiz').classList.remove('hidden');
-        loadQuestion();
-    } else {
-        alert("Veuillez remplir tous les champs.");
-    }
-}
-
-function loadQuestion() {
-    const q = questions[currentQuestion];
-    document.getElementById('quizImage').src = q.image;
-    document.getElementById('quizText').textContent = q.text;
-    document.getElementById('quizQuestion').textContent = q.question;
-
-    const optionsDiv = document.getElementById('options');
-    optionsDiv.innerHTML = "";
-    q.options.forEach(opt => {
-        const btn = document.createElement('button');
-        btn.textContent = opt;
-        btn.style.display = "block";
-        btn.style.margin = "10px auto";
-        btn.onclick = () => checkAnswer(opt);
-        optionsDiv.appendChild(btn);
+function loadQuestion(){
+    const q=questions[currentQuestion];
+    document.getElementById('quizImage').src=q.image;
+    document.getElementById('quizText').textContent=q.text;
+    document.getElementById('quizQuestion').textContent=q.question;
+    const optionsDiv=document.getElementById('options');optionsDiv.innerHTML="";
+    q.options.forEach(opt=>{
+        const btn=document.createElement('button');btn.textContent=opt;btn.style.display="block";btn.style.margin="10px auto";
+        btn.onclick=()=>checkAnswer(opt);optionsDiv.appendChild(btn);
     });
-
-    document.getElementById('nextBtn').disabled = true;
+    document.getElementById('nextBtn').disabled=true;
+    document.getElementById('nextBtn').style.backgroundColor="#388e3c"; // couleur par défaut
     updateProgress();
 }
-
-function checkAnswer(selected) {
-    const correct = questions[currentQuestion].answer;
-    if(selected === correct) {
+function checkAnswer(selected){
+    if(selected===questions[currentQuestion].answer){
         score++;
         alert("✅ Bonne réponse !");
-        document.getElementById('nextBtn').disabled = false;
+        document.getElementById('nextBtn').disabled=false;
+        document.getElementById('nextBtn').style.backgroundColor="#4CAF50"; // ✅ Vert vif
     } else {
         alert("❌ Mauvaise réponse, essayez encore !");
     }
 }
-
-function nextQuestion() {
+function nextQuestion(){
     currentQuestion++;
-    if(currentQuestion < questions.length) {
-        loadQuestion();
-    } else {
+    if(currentQuestion<questions.length){loadQuestion();}
+    else{
+        sendToGoogleSheet(); // ✅ Envoi des données à Google Sheets
         document.getElementById('quiz').classList.add('hidden');
         document.getElementById('felicitation').classList.remove('hidden');
-        document.getElementById('finalMessage').textContent = `Bravo ${userName}, vous avez terminé le quiz !`;
-        document.getElementById('score').textContent = score;
-
-        // ✅ Envoi des données à Google Sheets
-        sendToGoogleSheet();
+        document.getElementById('finalMessage').textContent=`Bravo ${prenom}, vous avez terminé le quiz !`;
+        document.getElementById('score').textContent=score;
     }
 }
-
-function updateProgress() {
-    const progress = ((currentQuestion) / questions.length) * 100;
-    document.getElementById('progress').style.width = progress + "%";
-}
-
-function sendToGoogleSheet() {
-    const data = {
-        nom: nom,
-        prenom: prenom,
-        mouvement: mouvement,
-        score: score
-    };
-    fetch(GOOGLE_SCRIPT_URL, {
-        method: "POST",
-        body: JSON.stringify(data)
-    }).then(response => {
-        console.log("Données envoyées à Google Sheets !");
-    }).catch(error => {
-        console.error("Erreur:", error);
-    });
-}
-</script>
-
-</body>
-</html>
+function updateProgress(){document.getElementById('progress').style.width=((currentQuestion)/questions.length)*100+"%";}
